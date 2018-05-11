@@ -6,7 +6,7 @@ if(!isset($_SESSION['aemail']) && !isset($_SESSION['temail'])){
 }
 ?>
 
-<title>Students</title>
+<title>Parents</title>
 
 <?php
 

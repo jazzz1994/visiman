@@ -36,7 +36,7 @@ if(isset($_SESSION['temail'])){
            $class      = $res_ass["class_name"];
            $classarr   = explode(',',$class);
            $email      = $res_ass["email"];
-
+           $reg_id     = $res_ass["reg_id"];
 
 
              if(isset($_POST['update']) && $_POST['update']=="update"){
@@ -45,7 +45,8 @@ if(isset($_SESSION['temail'])){
                $gender     = $_POST["gender"];
                $class      = implode(',',$_POST["class_name"]);
                $email      = $_POST["email"];
-
+               $reg_id     = $_POST["reg_id"];
+               $phone_no   = $_POST['pno'];
 
 
                $arr = array(
@@ -53,8 +54,11 @@ if(isset($_SESSION['temail'])){
                  "last_name"=>$last_name,
                  "gender"=>$gender,
                  "class_name"=>$class,
-                 "email"=>$email
+                 "email"=>$email,
+                 "pno"=>$phone_no,
+                 "reg_id"=>$reg_id
                );
+               
                $cond = array('id' => $tid);
               update('teacher',$arr,$cond);
               header("Location:listTeacher.php");
@@ -71,6 +75,7 @@ if(isset($_SESSION['temail'])){
             $gender     = $_POST["gender"];
             $class      = implode(',',$_POST["class_name"]);
             $email      = $_POST["email"];
+            $phone_no   = $_POST['pno'];
             if($_POST["password1"]==$_POST["password2"]){
             $password   = md5($_POST["password1"]);
               }else{
@@ -90,6 +95,7 @@ if(isset($_SESSION['temail'])){
                   "gender"=>$gender,
                   "class_name"=>$class,
                   "email"=>$email,
+                  "pno"=>$phone_no,
                   "password"=>$password
                 );
                 // print_r($arr);
@@ -98,8 +104,7 @@ if(isset($_SESSION['temail'])){
             }
 
 
-            $mailmsg =  mailFormat($first_name.' '.$last_name);
-            // echo $mailmsg;
+
 
           }
         ?>
@@ -215,7 +220,21 @@ if(isset($_SESSION['temail'])){
   <!--teacher last name e-->
 
 
+  <!--reg_id s -->
+                         <div class="form-group">
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reg_id">Registeration ID </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <?php if(isset($_GET['tid'])){
+                                echo "<input type='text' name='reg_id' value='$reg_id' id='reg_id' required class='form-control col-md-7 col-xs-12'>";
+                                        }
+                                    else{
+                                echo "<input type='text' name='reg_id' value='' id='reg_id' required class='form-control col-md-7 col-xs-12'>";
 
+                                    }
+                               ?>
+                          </div>
+                         </div>
+  <!--reg_id e-->
 
 
 <!-- class s -->
@@ -238,6 +257,21 @@ if(isset($_SESSION['temail'])){
 
 
 
+<!--phone no s -->
+                       <div class="form-group">
+                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Phone Number </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php if(isset($_GET['tid'])){
+                              echo "<input type='text' name='pno' value='$pno' id='phone_no' required class='form-control col-md-7 col-xs-12'>";
+                                      }
+                                  else{
+                              echo "<input type='text' name='pno' value='' id='phone_no' required class='form-control col-md-7 col-xs-12'>";
+
+                                  }
+                             ?>
+                        </div>
+                       </div>
+<!--phone no e-->
 
 
 <!-- email s -->
@@ -284,7 +318,7 @@ echo"<!-- password1 s -->
 <!-- button s -->
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                              
+
                               <?php
                               if(isset($_GET['tid'])){
                                 echo"<button  type='submit' class='btn btn-success' name='update' value='update'>update</button>";

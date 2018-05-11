@@ -5,7 +5,7 @@
  <html lang="en">
 
  <head>
- 	<title>Institute an Education Category Bootstrap Responsive Website Template | About :: w3layouts</title>
+ 	<title>SMS</title>
  	<!-- Meta Tags -->
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -68,7 +68,7 @@
 
  				<div class="header-bottom-w3layouts">
  					<div class="main-w3ls-logo">
- 						<h1><a href="index.html"><span class="fa fa-check-square-o" aria-hidden="true"></span>Institute</a></h1>
+ 						<h1><a href="index.html"><span class="fa fa-check-square-o" aria-hidden="true"></span>SMS</a></h1>
  					</div>
  					<!-- navigation -->
 
@@ -94,8 +94,6 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-
               <div class="signin-form profile">
                 <h3 class="register-title"><?php echo $result['first_name'] ?></h3>
                 <div class="login-form">

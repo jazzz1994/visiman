@@ -18,6 +18,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	</script>
+
+	<script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
 	<!-- //Meta Tags -->
 	<!-- Style-sheets -->
 	<?php include 'common/landing/style.php';
@@ -34,30 +36,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   }
 
 
+  $a = $t = $d = 0;
+
   $resp    = readrow('parent',array("email"=>$pemail));
   $res_par = mysqli_fetch_assoc($resp);
   $par_name = $res_par['first_name'];
   $ress = readrow('student', array("pemail"=>$pemail));
-  $ress2 = readrow('student',array("pemail"=>$pemail));
+
+
+
   $ress1 =readrow('student',array("pemail"=>$pemail));
+// 	while($aress1 = mysqli_fetch_assoc($ress1)){
+//         while($res_stu_attend = mysqli_fetch_assoc($ress1)){
+//
+//   	   $a++;
+// }
+
+	$ress2 = readrow('student',array("pemail"=>$pemail));
+	$ress3 =readrow('student',array("pemail"=>$pemail));
 	$ress4 =readrow('student',array("pemail"=>$pemail));
 
-	$tid = array();
-  $teacher = array();
-	while($stu_res4 = mysqli_fetch_assoc($ress4)){
-
-		$class =  $stu_res4['class_name'];
-		$qry4 = "SELECT id FROM teacher WHERE class_name LIKE '%$class%'";
-		$res_teach = mysqli_query($conn,$qry4);
-
-        while($tea_ass =mysqli_fetch_assoc($res_teach)){
-					$teacher[] = $tea_ass;
-				}
-	}
-foreach ($teacher as $key => $value) {
-	   $tid[] = $value['id'];
-}
-$utid = array_unique($tid);
+// 	$tid = array();
+//   $teacher = array();
+// 	while($stu_res4 = mysqli_fetch_assoc($ress4)){
+//
+// 		$class =  $stu_res4['class_name'];
+// 		$qry4 = "SELECT id FROM teacher WHERE class_name LIKE '%$class%'";
+// 		$res_teach = mysqli_query($conn,$qry4);
+//
+//         while($tea_ass =mysqli_fetch_assoc($res_teach)){
+// 					$teacher[] = $tea_ass;
+// 				}
+// 	}
+// foreach ($teacher as $key => $value) {
+// 	   $tid[] = $value['id'];
+// }
+// $utid = array_unique($tid);
 
 
 	// $qry2 = "SELECT * FROM attendence WHERE date>(date-(60*60*24)) AND red_id = $reg_id ORDER BY date DESC";
@@ -91,127 +105,176 @@ $utid = array_unique($tid);
 			<!-- //header -->
 		</div>
 	</div>
+</div>
 	<!-- //banner -->
 
-
-	<!--about-->
-	<div class="about-section" id="about">
-		<div class="container">
-			<h5 class="main-w3l-title">student diary</h5>
-       <div class="col-md-12 team-right">
-		 <?php  while($res_stu = mysqli_fetch_assoc($ress)){?>
-			 	<div class="col-md-6 col-sm-6 col-xs-6 team-grid stuinfo">
-					<h6><?php echo strtoupper($res_stu['first_name']." (".$res_stu['class_name'].")");?></h6>
-					<table>
-					 <thead>
-					   <tr>
-					     <th>Subject</th>
-					     <th>Topic covered</th>
-					     <th>Date</th>
-					   </tr>
-					 </thead>
-
-					 <tbody>
-					     <?php
-							 $date = date("Y-m-d",strtotime("-7 days"));
-					     $class =  $res_stu['class_name'];
-					     $qry3  = "SELECT sub_name, title, curr_date  FROM dailydairy WHERE class_name = '$class' AND curr_date>'$date' ORDER BY curr_date DESC";
-               $diary = mysqli_query($conn,$qry3);
-							  // readrow('dailydairy',array("class_name"=>$class));
-					      while($res_diary = mysqli_fetch_assoc($diary)){ ?>
-					   <tr>
-               <td><?php echo $res_diary['sub_name']; ?></td>
-					     <td><?php echo $res_diary['title'] ?></td>
-					     <td><?php echo $res_diary['curr_date'] ?></td>
-						 </tr>
-					  <?php } ?>
-					 </tbody>
-					</table>
-				</div>
-    <?php } ?>
-</div>
-
-
-
-		</div>
-	</div>
-	<!--//about-->
-
-<!-- attendence list s -->
+<br>
 	<div class="container">
-		<h5 class="main-w3l-title">attendence list</h5>
-		<div class="about-top">
+	<ul class="resp-tabs-list">
 
-		</div>
-		 <div class="col-md-12 team-right">
-   <?php
-    while($res_stu_attend = mysqli_fetch_assoc($ress1)){?>
-			<div class="col-md-6 col-sm-6 col-xs-6 team-grid stuinfo">
-				<h6><?php echo strtoupper($res_stu_attend['first_name']) ?>  weekly Attendence</h6>
-				<table>
-				 <thead>
-					 <tr>
-						 <th>Date</th>
-						 <th>Status</th>
-					 </tr>
-				 </thead>
+		<?php
+		    while($stu_ress2 = mysqli_fetch_assoc($ress2)){ ?>
+							<li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
+                 <?php echo $stu_ress2['first_name']." ".$stu_ress2['last_name']; ?>
+							</li>
+						<?php } ?>
+	</ul>
 
-				 <tbody>
-						 <?php
-						 $reg_id =  $res_stu_attend['reg_id'];
-						 $qry2 = "SELECT * FROM attendence WHERE date >'$date' AND reg_id = '$reg_id' ORDER BY date DESC";
-					   $res_attend = mysqli_query($conn,$qry2);
-					   // while($res_ass_attend = mysqli_fetch_assoc($res_attend)){
-					 	// 	print_r($res_ass_attend);
-					 	// }
-							while($res_ass_attend = mysqli_fetch_assoc($res_attend)){ ?>
-					 <tr>
-						 <td><?php echo $res_ass_attend['date']; ?></td>
-						 <td><?php echo $res_ass_attend['status'] ?></td>
-					 </tr>
-					<?php } ?>
-				 </tbody>
-				</table>
-			</div>
-	<?php } ?>
 	</div>
+
+
+	<br>
+
+
+
+<?php
+$i = 1;
+while($stu_ress = mysqli_fetch_assoc($ress)) {
+   $name    = $stu_ress['first_name']." ".$stu_ress['last_name'];
+	 $class   = $stu_ress['class_name'];
+	 $reg_id  = $stu_ress['reg_id'];
+	 $balance = $stu_ress['bfees'];
+	 $total   = $stu_ress['tfees'];
+
+	?>
+<br><br>
+<div class="container outline">
+	<!-- <p>Click on the buttons inside the tabbed menu:</p> -->
+		<div class="tab">
+		  <button class="tablinks active" onclick="openCity(event, 'profile<?php echo $i;?>')" id="defaultOpen<?php echo $i; ?>" >student Profile</button>
+		  <button class="tablinks" onclick="openCity(event, 'attendence<?php echo $i;?>')">Attendence</button>
+		  <button class="tablinks" onclick="openCity(event, 'diary<?php echo $i;?>')">Diary</button>
+			<button class="tablinks" onclick="openCity(event, 'teacher<?php echo $i;?>')">Teacher Info</button>
+			<button class="tablinks" onclick="openCity(event, 'payment<?php echo $i;?>')">Online fees payment</button>
+			<!-- <button class="tablinks" onclick="openCity(event, 'Tokyo')">Teacher In</button> -->
+		</div>
+
+		<div id="profile<?php echo $i;?>" class="tabcontent">
+        <div class="card stuprofile">
+				<img src="images/landing/dummymale.jpg" alt="John" style="width:100%; height:200px;">
+			  <h1></h1>
+			  <p class="protitle"><?php echo $name;  ?></p>
+			  <p><?php echo "class :".$class ?></p>
+			  <div style="margin: 24px 0;">
+
+			 </div>
+     </div>
+		  <!-- <p>London is the capital city of England.</p> -->
+		</div>
+
+
+		<div id="attendence<?php echo $i;?>" class="tabcontent">
+			<table class="table">
+			 <thead>
+				 <tr>
+					 <th scope="col">Date</th>
+					 <th scope="col">Status</th>
+				 </tr>
+			 </thead>
+
+			 <tbody>
+					 <?php
+
+					 $date = date("Y-m-d",strtotime("-7 days"));
+					 $qry2 = "SELECT * FROM stu_attendence WHERE date >'$date' AND reg_id = '$reg_id' ORDER BY date DESC";
+					 $res_attend = mysqli_query($conn,$qry2);
+
+						while($res_ass_attend = mysqli_fetch_assoc($res_attend)){ ?>
+				 <tr>
+					 <td><?php echo $res_ass_attend['date']; ?></td>
+					 <td><?php if($res_ass_attend['status']=="p"){echo "present";}else{echo"Absent";} ?></td>
+				 </tr>
+				<?php } ?>
+			 </tbody>
+			</table>
+		</div>
+
+		<div id="diary<?php echo $i;?>" class="tabcontent">
+			<table class="table">
+			 <thead>
+				 <tr>
+					 <th scope="col">Subject</th>
+					 <th scope="col">Topic covered</th>
+					 <th scope="col">Date</th>
+				 </tr>
+			 </thead>
+
+			 <tbody>
+					 <?php
+					 $date1 = date("Y-m-d");
+					 $qry3  = "SELECT sub_name, title, curr_date  FROM dailydairy WHERE class_name = '$class' AND curr_date='$date1' ORDER BY curr_date DESC";
+					 $diary = mysqli_query($conn,$qry3);
+						// readrow('dailydairy',array("class_name"=>$class));
+						while($res_diary = mysqli_fetch_assoc($diary)){ ?>
+				 <tr>
+					 <td><?php echo $res_diary['sub_name']; ?></td>
+					 <td><?php echo $res_diary['title'] ?></td>
+					 <td><?php echo $res_diary['curr_date'] ?></td>
+				 </tr>
+				<?php } ?>
+			 </tbody>
+			</table>
+		</div>
+
+		<div id="teacher<?php echo $i;?>" class="tabcontent">
+     <?php
+          $qry4 = "SELECT * FROM teacher WHERE class_name LIKE '%$class%'";
+					$res_teach = mysqli_query($conn,$qry4);
+
+			        while($tea_ass =mysqli_fetch_assoc($res_teach)){ ?>
+							<div class="card teaprofile">
+							<img src="images/landing/dummymale.jpg" alt="John" style="width:100%; height:200px;">
+							<h1></h1>
+							<p class="protitle"><?php echo $tea_ass['first_name']." ".$tea_ass['last_name']; ?></p>
+							<p><?php echo "Assign classes : ".$tea_ass['class_name'] ?></p>
+							<div style="margin: 24px 0;">
+								<a class="prolink" href="skype:echo123?call"><i class="fa fa-skype"></i></a>&nbsp;
+								<a class="prolink" href="mailto:<?php echo $tea_ass['email'];?>"><i class="fa fa-envelope"></i></a>&nbsp;
+								<a class="prolink" href="tel:<?php echo $tea_ass['pno'];?>"><i class="fa fa-phone"></i></a>
+						 </div>
+					 </div>
+				 <?php } ?>
+		</div>
+
+<?php if($balance > 0 ){?>
+		<!-- payment s -->
+		<div id="payment<?php echo $i; ?>" class="tabcontent">
+		        <form action="checkout.php" method="post">
+			 				<!-- <h6></h6> -->
+			 				<table class="table">
+			 				 <thead>
+			 					 <tr>
+			 						 <th scope="col">Description</th>
+			 						 <th scope="col">Amount</th>
+			 					 </tr>
+			 				 </thead>
+
+			 				 <tbody>
+
+			 					 <tr>
+			 						 <td>Balance due</td>
+			 						 <td><?php echo $balance; ?></td>
+			 					 </tr>
+								 <tr>
+			 						 <td>Installment</td>
+			 						 <td><?php echo $total/4; ?></td>
+			 					 </tr>
+								 <tr>
+			 						 <td>Net payable Amount</td>
+			 						 <td><?php echo $total/4; ?><input type="hidden" name="amount" value="<?php echo $total/4;?>"> <input type="hidden" name="reg_id" value="<?php echo $reg_id; ?>"></td>
+			 					 </tr>
+			 				 </tbody>
+			 				</table>
+							<button type="submit" class = "btn btn-primary" name="pay" value ="pay">Make Payment Now</button>
+		       </form>
+		</div>
+<!-- payment e -->
+<?php } ?>
+
 </div>
-<!-- Attendence List e-->
+<?php $i++;} ?>
+<br><br>
 
-
-
-	<!-- Teacher List s-->
-	<div class="team-section" id="team">
-		<div class="container">
-			<h5 class="main-w3l-title">Student Trainers</h5>
-
-
-			<div class="col-md-12 team-right">
-
-				<?php
-				foreach ($utid as $key => $value) {
-					  $qry5 = "SELECT * FROM teacher WHERE id = '$value'";
-						$res_teach = mysqli_query($conn,$qry5);
-						while($teacher = mysqli_fetch_assoc($res_teach)){?>
- 						 <div class="col-md-6 col-sm-6 col-xs-6 team-grid">
- 		 					<img class="team-img img-responsive" <?php if($teacher['gender']=='f'){?>src="images/landing/dumfem.jpg"<?php } else{ ?> src="images/landing/dummymale.jpg"<?php } ?>alt="">
- 		 					<h6><?php echo $teacher['first_name']." ( ".$teacher['class_name']." ) ";?></h6>
- 		 					<div class="social-icons-agileits">
- 		 						<ul>
- 		 							<li><a href="#"><span class="fa fa-google-plus"></span></a></li>
- 		 						</ul>
- 		 					</div>
- 		 					<div class="clearfix"> </div>
- 		 				</div>
-
- 			<?php }
- 		}
-				?>
-
-
-		</div>
-	</div>
-	<!--// Team -->
 	<!-- Footer -->
 	<div class="footer-agileits-w3layouts">
 		<div class="container">
@@ -246,6 +309,9 @@ $utid = array_unique($tid);
 			<p>&copy; 2018 Institute . All Rights Reserved | Design by <a href="http://w3layouts.com/"> W3layouts </a></p>
 		</div>
 	</div>
+
+
+
 	<!-- //Footer -->
 
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
@@ -297,6 +363,12 @@ $utid = array_unique($tid);
 	<!--js for bootstrap working-->
 	<script src="js/landing/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
+	<script type="text/javascript" src = "js/landing/custom.js"></script>
+
+
+
+
+
 </body>
 
 </html>

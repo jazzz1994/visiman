@@ -8,7 +8,7 @@ License URL: http://creativecommon/landings.org/licenses/by/3.0/
 <html lang="en">
 
 <head>
-	<title>Institute an Education Category Bootstrap Responsive Website Template | About :: w3layouts</title>
+	<title>SMS</title>
 	<!-- Meta Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

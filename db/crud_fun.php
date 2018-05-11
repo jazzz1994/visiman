@@ -103,20 +103,21 @@
        }
 
 
-    function mailFormat($uname){
-         $body = "Thank you for registering with our site!\nYour username is $uname  and your password is .\n\nSincerely,\nUs";
-         return $body;
-    }
+    
 
-   function check($qry){
-     $conn = dbConnection('localhost','root','','visitormnt');
-     $qry_exe = mysqli_query($conn,$qry);
-     $count = mysqli_num_rows($qry_exe);
-     if($count>0){
+   function check($tname,$cond){
+     $msg = "";
+     $res = readrow($tname,$cond);
+     $rowcount = mysqli_num_rows($res);
+
+     if($rowcount>0){
         $msg = "Error";
-        return $msg;
+
+     }else{
+        $msg = "Success";
      }
-     mysqli_close($conn);
+     return $msg;
+
    }
 
 

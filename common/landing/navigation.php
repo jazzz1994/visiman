@@ -16,13 +16,13 @@
     <ul class="nav navbar-nav">
       <li><a class="active" href="index.php">Home</a></li>
       <li><a href="about.php">About</a></li>
-      <li class="dropdown">
+      <!-- <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="icons.html">Web Icons</a></li>
           <li><a href="typography.html">Typography</a></li>
         </ul>
-      </li>
+      </li> -->
       <li><a href="contact.php">Contact</a></li>
 
 

@@ -27,7 +27,7 @@
 
     $dataPoints = array(
     	array("label"=>"Present", "symbol" => "Present","y"=>$res_attend),
-    	 array("label"=>"Silicon", "symbol" => "leave","y"=>$res_leave),
+    	array("label"=>"leave", "symbol" => "leave","y"=>$res_leave),
     	array("label"=>"Absent", "symbol" => "Absent","y"=>$res_absent),
     	// array("label"=>"Iron", "symbol" => "Fe","y"=>5),
     	// array("label"=>"Calcium", "symbol" => "Ca","y"=>3.6),

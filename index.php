@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Institute an Education Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+	<title>SMS</title>
 	<!-- Meta Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<div class="header-bottom-w3layouts">
 					<div class="main-w3ls-logo">
-						<h1><a href="index.html"><span class="fa fa-check-square-o" aria-hidden="true"></span>Institute</a></h1>
+						<h1><a href="index.html"><span class="fa fa-check-square-o" aria-hidden="true"></span>SMS</a></h1>
 					</div>
 
 

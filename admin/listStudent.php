@@ -27,10 +27,7 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
 
   $read_stu     = readAll('student');
-  // print_r($read_stu_ass);
-  // echo'<pre>';
-  // print_r(mysqli_fetch_assoc($getstudent_exe));
-  //Row Count
+
   $get_row_count = mysqli_num_rows($read_stu);
 ?>
 
@@ -109,6 +106,8 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                             <th class="column-title">gender</th>
                             <th class="column-title">class</th>
                             <th class="column-title">D.O.B</th>
+                            <th class="column-title">Total Fees</th>
+                            <th class="column-title">Balance due</th>
                             <th class="column-title">operations</th>
                         </tr>
 
@@ -123,7 +122,8 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                         $gender       = $result["gender"];
                         $class        = $result["class_name"];
                         $dob          = $result["dob"];
-
+                        $tfees        = $result["tfees"];
+                        $bfees        = $result["bfees"];
 
 
                   ?>
@@ -143,6 +143,8 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                       <td> <?php if($gender=='m'){echo "Male";}else{echo "Female";} ?> </td>
                       <td> <?php  echo $class;  ?>  </td>
                       <td> <?php echo $dob;    ?>  </td>
+                      <td> <?php echo $tfees;    ?>  </td>
+                      <td> <?php echo $bfees;    ?>  </td>
 
 
                       <td><a href='formStudent.php?sid=<?php echo $sid ;?>'>Edit</a> |

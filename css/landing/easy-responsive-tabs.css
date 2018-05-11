@@ -59,14 +59,14 @@ h2.resp-accordion {
 }
 
 .resp-tab-active, .resp-tabs-list li:hover, li.resp-tab-item.resp-tab-active {
-    background: #ea4c89;
+    background: #878181;
     color: #fff;
 }
 
 .resp-content-active,
 .resp-accordion-active { display: block; }
 
-.resp-tab-content { 
+.resp-tab-content {
     border: none;
 	border-top: transparent;
 }

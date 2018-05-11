@@ -16,6 +16,7 @@ $datenew=$datesep[2]."-".$datesep[1]."-".$datesep[0];
     <tr class="headings">
         <th class="column-title">RegId</th>
         <th class="column-title">First Name</th>
+        <th class="column-title">Date</th>
         <th class="column-title">Status</th>
     </tr>
 
@@ -26,6 +27,7 @@ $datenew=$datesep[2]."-".$datesep[1]."-".$datesep[0];
 <tr class="even pointer">
   <td class="column-title"><input type="hidden" name="reg_id[]" value="<?php echo $res_attend['reg_id']; ?>"><?php echo $res_attend['reg_id']; ?></td>
   <td class="column-title"><input type="hidden" name="first_name[]" value="<?php echo $res_attend['first_name']; ?>"><?php echo $res_attend['first_name']; ?></td>
+  <td class="column-title"><input type="hidden" name="date[]" value="<?php echo $res_attend['date']; ?>"><?php echo $res_attend['date']; ?></td>
   <td class="column-title">
   <div class="col-md-6 col-sm-6 col-xs-12">
     <div id="attend" class="btn-group" data-toggle="buttons">
@@ -33,10 +35,10 @@ $datenew=$datesep[2]."-".$datesep[1]."-".$datesep[0];
         <input name="status[<?echo$i?>]" <?php if($res_attend['status']=='p'){?>checked <?php } ?> value="p" data-parsley-id="12" type="radio">  P
       </label>
       <label class="btn btn-primary <?php if($res_attend['status']=='a'){?>active <?php } ?>" data-toggle-class="btn-primary-success" data-toggle-passive-class="btn-default">
-        <input name="status[<?echo$i?>]" <?php if($res_attend['status']=='p'){?>checked <?php } ?> value="a" type="radio"> A
+        <input name="status[<?echo$i?>]" <?php if($res_attend['status']=='a'){?>checked <?php } ?> value="a" type="radio"> A
       </label>
       <label class="btn btn-primary <?php if($res_attend['status']=='l'){?>active <?php } ?>" data-toggle-class="btn-primary-success" data-toggle-passive-class="btn-default">
-        <input name="status[<?echo$i?>]" <?php if($res_attend['status']=='p'){?>checked<?php } ?> value="l" type="radio"> L
+        <input name="status[<?echo$i?>]" <?php if($res_attend['status']=='l'){?>checked<?php } ?> value="l" type="radio"> L
       </label>
     </div>
 

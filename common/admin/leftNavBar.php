@@ -54,9 +54,18 @@
                   <ul class='nav child_menu'>
                     <li><a href='stu_attendence.php'>Mark student Attendence</a></li>
                     <li><a href='tea_attendence.php'>Mark teacher Attendence</a></li>
-                    <li><a href='listAttend.php'>List Attendence</a></li>
+                    <li><a href='liststuAttend.php'>List student Attendence</a></li>
+                    <li><a href='listteaAttend.php'>List teacher Attendence</a></li>
                   </ul>
                 </li>
+
+                <li><a><i class='fa fa-user'></i> Manage Fees<span class='fa fa-chevron-down'></span></a>
+                <ul class='nav child_menu'>
+                  <li><a href='addFees.php'>Assign fees </a></li>
+                  <li><a href='listFees.php'>List fees</a></li>
+                </ul>
+              </li>
+
                 <li><a><i class='fa fa-desktop'></i> Parent Details <span class='fa fa-chevron-down'></span></a>
                   <ul class='nav child_menu'>
                   <li><a href='formParent.php'>Add Parent</a></li>

@@ -1,5 +1,6 @@
 <?php
      include('../common/admin/header.php');
+     include('../common/dbConn.php');
     if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
       header("location:index.php");
     }
@@ -46,8 +47,8 @@
                "dob"=>$dob
              );
              $cond = array('id' => $sid);
-            update('student',$arr,$cond);
-            header("Location:listStudent.php");
+             update('student',$arr,$cond);
+             header("Location:listStudent.php");
            }
 
 
@@ -62,7 +63,13 @@
           $curr_date  = $_POST["curr_date"];
 
           $qry   = "SELECT * FROM dailydairy WHERE title = '$title' AND class_name = '$class_name' AND curr_date='$curr_date'";
-          $msg  = check($qry);
+          $check = mysqli_query($conn,$qry);
+
+          $check_result = mysqli_num_rows($check);
+          if($check_result>0){
+            $msg = "Error";
+          }
+
 
            if(empty($msg)){
              $arr = array(

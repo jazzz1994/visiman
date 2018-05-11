@@ -96,7 +96,8 @@
 
 
 
-                   <?php $read_tea     = readAll('teacher');$i=0; $status = array(); while($result = mysqli_fetch_assoc($read_tea)){?>
+                   <?php $read_tea     = readAll('teacher');
+                          $i=0; $status = array(); while($result = mysqli_fetch_assoc($read_tea)){?>
                       <tr class="even pointer">
                         <td class="column-title"><?php echo $result['reg_id']; ?><input type="hidden" name="reg_id[]" value="<?php echo $result['reg_id']; ?>"></td>
                         <td class="column-title"><?php echo $result['first_name'];?><input type="hidden" name="first_name[]" value="<?php echo $result['first_name']; ?>"></td>

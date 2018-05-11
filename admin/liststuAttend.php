@@ -5,18 +5,14 @@
  if(isset($_POST["update"]) && $_POST["update"]=="update"){
 
    foreach ($_POST['status'] as $id => $value) {
+
        $student_name = $_POST['first_name'][$id];
        $reg_id       = $_POST['reg_id'][$id];
-       $date         = date("d-m-Y");
-      //  $qry          = "SELECT * FROM attendence WHERE reg_id = '$reg_id' AND date = '$date'";
-      //  $stu          = mysqli_query($conn,$qry);
-      //  $count        = mysqli_num_rows($stu);
-      //  if($count>0){
-      //    $msg = "Error";
-      //  }else{
+       $date         = $_POST['date'][$id];
+
          $qry2     = "UPDATE stu_attendence SET status = '$value' WHERE date = '$date' AND reg_id ='$reg_id'";
          $upattend = mysqli_query($conn,$qry2);
-      //  }
+
    }
 
 
@@ -64,7 +60,7 @@
 
 
 
-                    <form id="form"  method="POST" data-parsley-validate class="form-horizontal form-label-left" >
+                    <form id="form"   data-parsley-validate class="form-horizontal form-label-left" >
 
 
                       <!-- class dropdown s -->
@@ -88,7 +84,7 @@
 
                     <!--  Date picker s-->
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Date <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input id='date' name='date' class='date-picker form-control col-md-7 col-xs-12' required placeholder='dd/mm/yy' type='date'>
@@ -96,25 +92,25 @@
                                         </div>
                   <!--  Date picker e-->
 
-                  <!--  Date button s-->
+                  <!--   button s-->
                                       <div class="form-group">
                                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <input id ="view" class = "btn btn-primary" name="submit" value="viewattendence">
+                                            <input id ="view" class = "btn btn-primary col-md-7 col-xs-12" name="submit" value="viewattendence">
                                           </div>
                                       </div>
-                <!--  Date button e-->
+                <!--  button e-->
 
               </form>
 
 
-                   <form data-parsley-validate class="form-horizontal form-label-left"  action="listAttend.php" method="post">
+                   <form data-parsley-validate class="form-horizontal form-label-left"  action="liststuAttend.php" method="post">
                     <div  id="stud_attend">
 
                     </div>
                     <!--  Date button s-->
                                         <div class="form-group" >
-                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                              <input id ="upattend" type="submit" class = "btn btn-primary" name="update" value="update">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                              <input id ="upattend" type="submit" class = "btn btn-primary col-md-7 col-xs-12" name="update" value="update">
                                             </div>
                                         </div>
                   <!--  Date button e-->

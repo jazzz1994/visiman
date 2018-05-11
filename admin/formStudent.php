@@ -29,6 +29,7 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
          $dob        = $res_ass["dob"];
          $pemail     = $res_ass["pemail"];
          $class      = $res_ass["class_name"];
+         
 
            if(isset($_POST['update']) && $_POST['update']=="update"){
              $first_name = $_POST["first_name"];
@@ -71,6 +72,10 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
            $dob        = $_POST["dob"];
           //  $stu_img    = $_POST["stu_img"];
 
+           $fees = readrow("fees",array("classname"=>$class));
+           while($fees_asc = mysqli_fetch_assoc($fees)){
+                 $amt      = $fees_asc['fees'];
+           }
 
           if(isset($_FILES['stu_img'])){
                 $errors= array();
@@ -104,13 +109,11 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
 
 
-           $res_mail = readrow('student',array("reg_id"=>$reg_id));
-           $rowcount = mysqli_num_rows($res_mail);
-           if($rowcount>0){
-                $msg = "Error";
+           $msg = check('student',array("reg_id"=>$reg_id));
 
-           }
-           else{
+           if($msg=="Success"){
+
+
 
                $arr = array(
                  "first_name"=>$first_name,
@@ -120,14 +123,16 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                  "class_name"=>$class,
                  "dob"=>$dob,
                  "pemail" =>$pemail,
+                 "tfees" =>$amt,
+                 "bfees" =>$amt,
                  "stu_img"=>$file_new
                );
 
                insert('student', $arr);
-               $msg = "Success";
+
            }
 
-        //  header("Location:listStudent.php");
+
 
         }
       ?>
@@ -340,7 +345,9 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
 
 <!-- upload e -->
-
+<!-- fees s -->
+              <input type="hidden" name="amount" value="">
+<!-- fees e -->
 
                       <div class="ln_solid"></div>
 <!-- buttons s -->
