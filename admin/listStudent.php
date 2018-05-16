@@ -5,7 +5,7 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 }
 
  ?>
-<title>Students</title>
+<title>List Students</title>
 
 <?php
   $class_res =  readAll('class');
@@ -137,7 +137,7 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                             </div>
                       </th>
                       <td> <?php echo $i; ?>  </td>
-                      <td> <?php echo "<img src='../upload/$stu_img' width=50px height=50px>"; ?>  </td>
+                      <td> <?php echo "<img src='$stu_img' width=50px height=50px>"; ?>  </td>
                       <td> <?php echo ucfirst($first_name); ?> </td>
                       <td> <?php echo ucfirst($last_name); ?> </td>
                       <td> <?php if($gender=='m'){echo "Male";}else{echo "Female";} ?> </td>
@@ -157,13 +157,13 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
            </div>
 
 
-            <!-- buttons s -->
-                                  <div class="form-group">
-                                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                       <button  type='submit' class='btn btn-success col-md-7 col-xs-12' onclick="return confirm('Are you sure?')" name='submit' value='delete'>delete selected</button>
-                                      </div>
-                                  </div>
-            <!-- buttons e -->
+    <!-- buttons s -->
+                          <div class="form-group">
+                              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                               <button  type='submit' class='btn btn-danger col-md-7 col-xs-12' onclick="return confirm('Are you sure?')" name='submit' value='delete'>delete selected</button>
+                              </div>
+                          </div>
+    <!-- buttons e -->
 
 
 

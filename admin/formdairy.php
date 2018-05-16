@@ -220,9 +220,7 @@
 <!-- buttons s -->
                       <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button class="btn btn-primary" type="button">Cancel</button>
-                            <input class="btn btn-primary" type="reset" value="Reset" name="reset">
-                            <input type='submit' class='btn btn-success' name='submit' value='submit'>
+                            <input type='submit' class='btn btn-success col-md-7 col-xs-12' name='submit' value='submit'>
                              </div>
                       </div>
 <!-- buttons e -->

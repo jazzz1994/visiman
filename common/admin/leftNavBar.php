@@ -49,16 +49,12 @@
                       <li><a href='listTopic.php'>List Topic</a></li>
                     </ul>
                   </li>
-
-                  <li><a><i class='fa fa-user'></i> Attendence<span class='fa fa-chevron-down'></span></a>
-                  <ul class='nav child_menu'>
-                    <li><a href='stu_attendence.php'>Mark student Attendence</a></li>
-                    <li><a href='tea_attendence.php'>Mark teacher Attendence</a></li>
-                    <li><a href='liststuAttend.php'>List student Attendence</a></li>
-                    <li><a href='listteaAttend.php'>List teacher Attendence</a></li>
-                  </ul>
-                </li>
-
+                <li><a><i class='fa fa-user'></i>Student Attendence<span class='fa fa-chevron-down'></span></a>
+                <ul class='nav child_menu'>
+                  <li><a href='stu_attendence.php'>Mark student Attendence</a></li>
+                  <li><a href='liststuAttend.php'>List student Attendence</a></li>
+                </ul>
+              </li>
                 <li><a><i class='fa fa-user'></i> Manage Fees<span class='fa fa-chevron-down'></span></a>
                 <ul class='nav child_menu'>
                   <li><a href='addFees.php'>Assign fees </a></li>
@@ -75,13 +71,39 @@
                 </li>";}
 
                   if(isset($_SESSION['aemail'])){
-                    echo"<li><a><i class='fa fa-group'></i> Manage Teacher <span class='fa fa-chevron-down'></span></a>
+                    echo"<li>
+                       <a><i class='fa fa-group'></i> Manage Teacher <span class='fa fa-chevron-down'></span></a>
                       <ul class='nav child_menu'>
                         <li><a href='formTeacher.php'>Add Teacher</a></li>
                         <li><a href='listTeacher.php'>List Teacher</a></li>
 
                       </ul>
-                    </li>";}
+                    </li>
+
+                    <li><a><i class='fa fa-user'></i>Teacher Attendence<span class='fa fa-chevron-down'></span></a>
+                    <ul class='nav child_menu'>
+                      <li><a href='tea_attendence.php'>Mark teacher Attendence</a></li>
+                      <li><a href='listteaAttend.php'>List teacher Attendence</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class='fa fa-user'></i>Manage Class<span class='fa fa-chevron-down'></span></a>
+                  <ul class='nav child_menu'>
+                    <li><a href='formClass.php'>Add Class</a></li>
+                    <li><a href='listClass.php'>List Class</a></li>
+                    <li><a href='Addsubject.php'>Add New Subject</a></li>
+                  </ul>
+                </li>
+
+                <li><a><i class='fa fa-user'></i>Manage Holiday<span class='fa fa-chevron-down'></span></a>
+                <ul class='nav child_menu'>
+                  <li><a href='formHoliday.php'>Add Holidays</a></li>
+                  <li><a href='listHoliday.php'>List Holidays</a></li>
+                </ul>
+              </li>
+
+
+                    ";}
 
                     ?>
               </ul>

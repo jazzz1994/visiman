@@ -9,21 +9,13 @@ if(!$_SESSION['aemail']){
 
 <?php
 
-
-
-  // if(isset($_GET['did'])){
-  //   $did =$_GET['did'] ;
-  //   delete('',array("id"=>$did));
-  // }
+ if(isset($_GET['did'])){
+    $did = $_GET['did'];
+    delete('class_sub',array('id'=>$did));
+ }
 
 
   $read_class_sub     = readAll('class_sub');
-  // $read_stu_class = readAll('class_sub');
-
-  // print_r($read_stu_ass);
-  // echo'<pre>';
-  // print_r(mysqli_fetch_assoc($getstudent_exe));
-  //Row Count
   $get_row_count = mysqli_num_rows($read_class_sub);
 ?>
 
@@ -88,8 +80,9 @@ if(!$_SESSION['aemail']){
 
 
 
-                      <td><a href='formClass.php?cid=<?php echo $cid ;?>'>Edit</a> |
-                        <a onclick = "return confirm('Are you sure?')" href='listClass.php?cid=<?php echo $cid;?>'>Delete</a></td>
+                      <td><a href='formClass.php?cid=<?php echo $cid ;?>'><span class="glyphicon glyphicon-edit" aria-hidden="true"></a>
+                        <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+                        <a onclick = "return confirm('Are you sure?')" href='listClass.php?did=<?php echo $cid;?>'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                   </tr>
                     <?php $i++; }
              ?>

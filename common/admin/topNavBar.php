@@ -23,8 +23,10 @@
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li> -->
+                    </li> -->
+                    <?php if(isset($_SESSION['temail'])) {?>
+                      <li><a href="listTeacher.php">View All Teachers</a></li>
+                    <?php } ?>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

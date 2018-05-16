@@ -9,7 +9,7 @@
   foreach ($_POST['status'] as $id => $value) {
       $teacher_name = $_POST['first_name'][$id];
       $reg_id       = $_POST['reg_id'][$id];
-      $date         = date("d-m-Y");
+      $date         =  date('Y-m-d');
       $qry          = "SELECT * FROM tea_attendence WHERE reg_id = '$reg_id' AND date = '$date'";
       $tea          = mysqli_query($conn,$qry);
       $count        = mysqli_num_rows($tea);

@@ -8,12 +8,10 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
 
  ?>
-<title>Add Student</title>
+<title>Manage Students</title>
       <?php
 
-
-
-      $class_res=readAll('class');
+     $class_res=readAll('class');
       $msg="";
 
 
@@ -29,7 +27,8 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
          $dob        = $res_ass["dob"];
          $pemail     = $res_ass["pemail"];
          $class      = $res_ass["class_name"];
-         
+         $stu_img    = $res_ass["stu_img"];
+
 
            if(isset($_POST['update']) && $_POST['update']=="update"){
              $first_name = $_POST["first_name"];
@@ -39,15 +38,18 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
              $class      = $_POST["class_name"];
              $pemail     = $_POST["pemail"];
              $dob        = $_POST["dob"];
+             $imgpath    = upload('stu_img',$reg_id);
+
 
              $arr = array(
                "first_name"=>$first_name,
-               "last_name"=>$last_name,
-               "reg_id"=>$reg_id,
-               "gender"=>$gender,
+               "last_name" =>$last_name,
+               "reg_id"    =>$reg_id,
+               "gender"    =>$gender,
                "class_name"=>$class,
-               "pemail" =>$pemail,
-               "dob"=>$dob
+               "pemail"    =>$pemail,
+               "dob"       =>$dob,
+               "stu_img"   =>$imgpath
              );
              $cond = array('id' => $sid);
             update('student',$arr,$cond);
@@ -70,41 +72,13 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
            $class      = $_POST["class_name"];
            $pemail     = $_POST["pemail"];
            $dob        = $_POST["dob"];
-          //  $stu_img    = $_POST["stu_img"];
+           $imgpath    = upload('stu_img',$reg_id);
 
-           $fees = readrow("fees",array("classname"=>$class));
+
+           $fees = readrow("fees",array("class_name"=>$class));
            while($fees_asc = mysqli_fetch_assoc($fees)){
                  $amt      = $fees_asc['fees'];
            }
-
-          if(isset($_FILES['stu_img'])){
-                $errors= array();
-                $file_name = $_FILES['stu_img']['name'];
-                $file_size =$_FILES['stu_img']['size'];
-                $file_tmp =$_FILES['stu_img']['tmp_name'];
-                $file_type=$_FILES['stu_img']['type'];
-                $file_ext=explode('.',$file_name);
-                $file_ext_end = end($file_ext);
-                $file_ext_l = strtolower($file_ext_end);
-                $file_new = "../upload/".$first_name.".$file_ext_l";
-
-                $expensions= array("jpeg","jpg","png");
-
-                if(in_array($file_ext_l,$expensions)=== false){
-                   $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-                }
-
-                if($file_size > 2097152){
-                   $errors[]='File size must be less than 2 MB';
-                }
-
-                if(empty($errors)==true){
-                   move_uploaded_file($file_tmp,$file_new);
-
-                }else{
-                   print_r($errors);
-                }
-          }
 
 
 
@@ -117,15 +91,15 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
                $arr = array(
                  "first_name"=>$first_name,
-                 "last_name"=>$last_name,
-                 "reg_id"=>$reg_id,
-                 "gender"=>$gender,
+                 "last_name" =>$last_name,
+                 "reg_id"    =>$reg_id,
+                 "gender"    =>$gender,
                  "class_name"=>$class,
-                 "dob"=>$dob,
-                 "pemail" =>$pemail,
-                 "tfees" =>$amt,
-                 "bfees" =>$amt,
-                 "stu_img"=>$file_new
+                 "dob"       =>$dob,
+                 "pemail"    =>$pemail,
+                 "tfees"     =>$amt,
+                 "bfees"     =>$amt,
+                 "stu_img"   =>$imgpath
                );
 
                insert('student', $arr);
@@ -176,24 +150,27 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                   <div class="x_content">
                     <br />
 
-                      <form method='POST' action="" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-<!-- error message s-->
-                                        <div class="form-group">
-                                              <?php
-                                                    if($msg == "Error"){
-                                                      echo"<div class='alert alert-danger' role='alert'>student already registered with this registeration id</div>";
+  <!-- error message s-->
+                                          <div class="form-group">
+                                                <?php
+                                                   if(isset($msg)){
+                                                      if($msg == "Error"){
+                                                        echo"<div class='alert alert-danger' role='alert'>student already registered with this registeration id</div>";
+                                                      }
+                                                      elseif($msg == "Success"){
+                                                        echo"<div class='alert alert-success' role='alert'>Success</div>";
+                                                      }else {
+                                                        echo"<div></div>";
+                                                      }
                                                     }
-                                                    elseif($msg == "Success"){
-                                                      echo"<div class='alert alert-success' role='alert'>Success</div>";
-                                                    }else {
-                                                      echo"<div></div>";
-                                                    }
-                                              ?>
-                                         </div>
+                                                ?>
+                                           </div>
 
 
-<!-- error message e-->
+  <!-- error message e-->
+                      <form method='POST' action="" id="demo-form2" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left">
+
+
 
 <!-- First name s-->
                       <div class="form-group">
@@ -224,7 +201,7 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                           </div>
                           <div class="col-md-4 col-sm-6 col-xs-12">
                               <?php if(isset($_GET['sid'])){
-                                echo "<input type='text' name='first_name' value='$first_name' id='first-name' required class='form-control col-md-7 col-xs-12'>";
+                                echo "<input type='text' name='first_name' value='$first_name' id='first-name'class='form-control col-md-7 col-xs-12'>";
                                         }
                                     else{
                                 echo "<input type='text' name='first_name' value='' id='first-name' required class='form-control col-md-7 col-xs-12'>";
@@ -305,13 +282,17 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                           </div>
                       </div>
 <!--  Date of birth e-->
+
+
+
+
 <!-- parent email s-->
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">parent email <span class="required">*</span>
                     </label>
                       <div class="col-md-4 col-sm-6 col-xs-12">
                           <?php if(isset($_GET['sid'])){
-                            echo "<input type='email' name='pemail' value='$pemail' id='pemail' required class='form-control col-md-7 col-xs-12'>";
+                            echo "<input type='email' name='pemail' required value='$pemail' id='pemail' class='form-control col-md-7 col-xs-12'>";
                                     }
                                 else{
                             echo "<input type='email' name='pemail' value='' id='pemail' required class='form-control col-md-7 col-xs-12'>";
@@ -322,19 +303,25 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
                 </div>
 <!-- parent email e-->
 
+<!-- Display image s -->
+            <?php if(isset($_GET['sid'])){ ?><div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <img src="<?php echo $stu_img ?>" width="10%" height="100px" style="margin: 6px 28%;" alt="">
+                  </div>
+            </div>
+          <?php } ?>
+<!-- Display image e -->
+
 <!-- upload s -->
                       <div class="form-group">
-                        <?php if(!isset($_GET['sid'])){ ?>
-                          <label for="upload" class="control-label col-md-3 col-sm-3 col-xs-12">your image<span class="required">*</span>
+                          <label for="upload" class="control-label col-md-3 col-sm-3 col-xs-12">Photo<span class="required"></span>
                           </label>
-                        <?php } ?>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
                             if(isset($_GET['sid'])){
-                              // echo "<input  id='upload' name='stu_img' value='$stu_img' class='btn col-md-7 col-xs-12' required placeholder='upload your image' type='file'>";
+                              echo "<input  id='upload' name='stu_img'  class='col-md-7 col-xs-12' placeholder='upload your image' type='file'>";
                                }
                             else{
-                              echo "<input id='upload' name='stu_img' class=' btn col-md-7 col-xs-12' required placeholder='upload your image' type='file'>";
+                              echo "<input id='upload' name='stu_img' class='col-md-7 col-xs-12' required type='file'>";
                             }
 
                               ?>
@@ -345,23 +332,20 @@ if(!isset($_SESSION['temail']) && !isset($_SESSION['aemail'])){
 
 
 <!-- upload e -->
-<!-- fees s -->
-              <input type="hidden" name="amount" value="">
-<!-- fees e -->
-
                       <div class="ln_solid"></div>
 <!-- buttons s -->
                       <div class="form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 
+                              <!-- <button type="reset" name="reset" class='btn btn-primary col-md-4 col-xs-12'> reset</button> -->
                             <?php
                             if(isset($_GET['sid'])){
-                              echo"<button  type='submit' class='btn btn-success col-md-7 col-xs-12' name='update' value='update'>update</button>";
+                              echo"<button  type='submit' class='btn btn-success col-md-4 col-xs-12' name='update' value='update'>update</button>";
 
 
                                }
                              else{
-                               echo "<input type='submit' class='btn btn-success col-md-7 col-xs-12' name='submit' value='submit'>";
+                               echo "<input type='submit' class='btn btn-success col-md-4 col-xs-12' name='submit' value='submit'>";
                              }
                                 ?>
 

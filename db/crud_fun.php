@@ -103,7 +103,7 @@
        }
 
 
-    
+
 
    function check($tname,$cond){
      $msg = "";
@@ -120,6 +120,74 @@
 
    }
 
+
+   function upload($fname,$reg_id){
+     $errors= array();
+     $file_name = $_FILES[$fname]['name'];
+     $file_size = $_FILES[$fname]['size'];
+     $file_tmp =$_FILES[$fname]['tmp_name'];
+     $file_type=$_FILES[$fname]['type'];
+     $file_ext=explode('.',$file_name);
+     $file_ext_end = end($file_ext);
+     $file_ext_l = ".jpg";
+     $file_new = "../upload/".$reg_id."".$file_ext_l;
+
+    //  $expensions= array("jpeg","jpg","png");
+
+    //  if(in_array($file_ext_l,$expensions) === false){
+    //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+    //  }
+
+     if($file_size > 2097152){
+        $errors[]='File size must be less than 2 MB';
+     }
+
+     if(empty($errors)==true){
+        move_uploaded_file($file_tmp,$file_new);
+        return $file_new;
+
+     }else{
+
+        print_r($errors);
+        return "errors";
+     }
+   }
+
+
+
+
+   function editupload($fname,$reg_id){
+     $errors= array();
+     $file_name = $_FILES[$fname]['name'];
+     $file_size =$_FILES[$fname]['size'];
+     $file_tmp =$_FILES[$fname]['tmp_name'];
+     $file_type=$_FILES[$fname]['type'];
+     $file_ext=explode('.',$file_name);
+     $file_ext_end = end($file_ext);
+     $file_ext_l = ".jpg";
+      unlink("../upload/".$reg_id."".$file_ext_l);
+     $file_new = "../upload/".$reg_id."".$file_ext_l;
+
+    //  $expensions= array("jpeg","jpg","png");
+
+    //  if(in_array($file_ext_l,$expensions) === false){
+    //     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+    //  }
+
+     if($file_size > 2097152){
+        $errors[]='File size must be less than 2 MB';
+     }
+
+     if(empty($errors)==true){
+        move_uploaded_file($file_tmp,$file_new);
+        return $file_new;
+
+     }else{
+
+        print_r($errors);
+        return "errors";
+     }
+   }
 
 
 ?>

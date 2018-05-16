@@ -46,39 +46,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
   $ress1 =readrow('student',array("pemail"=>$pemail));
-// 	while($aress1 = mysqli_fetch_assoc($ress1)){
-//         while($res_stu_attend = mysqli_fetch_assoc($ress1)){
-//
-//   	   $a++;
-// }
-
 	$ress2 = readrow('student',array("pemail"=>$pemail));
 	$ress3 =readrow('student',array("pemail"=>$pemail));
 	$ress4 =readrow('student',array("pemail"=>$pemail));
 
-// 	$tid = array();
-//   $teacher = array();
-// 	while($stu_res4 = mysqli_fetch_assoc($ress4)){
-//
-// 		$class =  $stu_res4['class_name'];
-// 		$qry4 = "SELECT id FROM teacher WHERE class_name LIKE '%$class%'";
-// 		$res_teach = mysqli_query($conn,$qry4);
-//
-//         while($tea_ass =mysqli_fetch_assoc($res_teach)){
-// 					$teacher[] = $tea_ass;
-// 				}
-// 	}
-// foreach ($teacher as $key => $value) {
-// 	   $tid[] = $value['id'];
-// }
-// $utid = array_unique($tid);
-
-
-	// $qry2 = "SELECT * FROM attendence WHERE date>(date-(60*60*24)) AND red_id = $reg_id ORDER BY date DESC";
-  // $res_attend = mysqli_query($conn,$qry2);
-  // while($res_ass_attend = mysqli_fetch_assoc($res_attend)){
-	// 	print_r($res_ass_attend);
-	// }
 
 ?>
 </head>
@@ -124,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 	<br>
-
+  <br>
 
 
 <?php
@@ -137,7 +108,7 @@ while($stu_ress = mysqli_fetch_assoc($ress)) {
 	 $total   = $stu_ress['tfees'];
 
 	?>
-<br><br>
+
 <div class="container outline">
 	<!-- <p>Click on the buttons inside the tabbed menu:</p> -->
 		<div class="tab">
@@ -152,12 +123,12 @@ while($stu_ress = mysqli_fetch_assoc($ress)) {
 		<div id="profile<?php echo $i;?>" class="tabcontent">
         <div class="card stuprofile">
 				<img src="images/landing/dummymale.jpg" alt="John" style="width:100%; height:200px;">
-			  <h1></h1>
+			  <h1><?php echo "NIIT";?> </h1>
 			  <p class="protitle"><?php echo $name;  ?></p>
 			  <p><?php echo "class :".$class ?></p>
-			  <div style="margin: 24px 0;">
+			  <!-- <div style="margin: 24px 0;">
 
-			 </div>
+			 </div> -->
      </div>
 		  <!-- <p>London is the capital city of England.</p> -->
 		</div>
@@ -174,15 +145,14 @@ while($stu_ress = mysqli_fetch_assoc($ress)) {
 
 			 <tbody>
 					 <?php
-
-					 $date = date("Y-m-d",strtotime("-7 days"));
-					 $qry2 = "SELECT * FROM stu_attendence WHERE date >'$date' AND reg_id = '$reg_id' ORDER BY date DESC";
+					 $date1 = date("Y-m-d",strtotime("-7 days"));
+					 $qry2 = "SELECT * FROM stu_attendence WHERE date >='$date1' AND reg_id = '$reg_id' ORDER BY date DESC";
 					 $res_attend = mysqli_query($conn,$qry2);
 
 						while($res_ass_attend = mysqli_fetch_assoc($res_attend)){ ?>
 				 <tr>
 					 <td><?php echo $res_ass_attend['date']; ?></td>
-					 <td><?php if($res_ass_attend['status']=="p"){echo "present";}else{echo"Absent";} ?></td>
+					 <td><?php if($res_ass_attend['status']=="p"){echo "present";}elseif ($res_ass_attend['status']=="l"){echo "leave";}else{echo"Absent";} ?></td>
 				 </tr>
 				<?php } ?>
 			 </tbody>
@@ -224,7 +194,7 @@ while($stu_ress = mysqli_fetch_assoc($ress)) {
 			        while($tea_ass =mysqli_fetch_assoc($res_teach)){ ?>
 							<div class="card teaprofile">
 							<img src="images/landing/dummymale.jpg" alt="John" style="width:100%; height:200px;">
-							<h1></h1>
+							<h1><?php echo $tea_ass['sub_name']; ?></h1>
 							<p class="protitle"><?php echo $tea_ass['first_name']." ".$tea_ass['last_name']; ?></p>
 							<p><?php echo "Assign classes : ".$tea_ass['class_name'] ?></p>
 							<div style="margin: 24px 0;">

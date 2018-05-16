@@ -11,12 +11,12 @@ header("location:index.php");
 
 
    if(isset($_GET['cid'])){
-      $sid=$_GET['cid'];
-      $res=readrow('class_stu',array("id"=>$cid));
+      $cid=$_GET['cid'];
+      $res=readrow('class_sub',array("id"=>$cid));
       $res_ass=mysqli_fetch_assoc($res);
 
       $class_name =$res_ass["class_name"];
-      $sub_name   =$res_ass["sub_name"];
+      $sub_arr    =explode(',',$res_ass["sub_name"]);
 
         if(isset($_POST['update']) && $_POST['update']=="update"){
           $class_name = $_POST["class_name"];
@@ -28,7 +28,7 @@ header("location:index.php");
             "sub_name"=>$sub_name
           );
           $cond = array('id' => $cid);
-         update('class_stu',$arr,$cond);
+         update('class_sub',$arr,$cond);
          header("Location:listClass.php");
         }
 
@@ -41,7 +41,7 @@ header("location:index.php");
       $sub_name =array();
       $class_name = $_POST["class_name"];
       $sub_name  = $_POST["sub_name"];
-      $str = implode(', ',$sub_name);
+      $str = implode(',',$sub_name);
 
 
         $arrsc  = array('class_name' => $class_name,
@@ -97,7 +97,7 @@ header("location:index.php");
                         </div>
                         <div class="x_content">
                           <br />
-                          <form id="demo-form2" method="POST" data-parsley-validate class="form-horizontal form-label-left">
+
                             <form method='POST' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 <!-- class name s-->
@@ -116,32 +116,33 @@ header("location:index.php");
                                                     </div>
 <!-- class name e -->
 
+<!-- subject name s -->
                                               <div class="form-group">
                                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Subject</label>
-                                                  <div class="col-md-9 col-sm-9 col-xs-12">
-                                                  <select class="select2_multiple form-control" required name="sub_name[]" multiple="multiple">
+                                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                                  <select class="select2_multiple form-control col-md-7 col-xs-12" required name="sub_name[]" multiple="multiple">
                                                     <?php
                                                     while($result_sub = mysqli_fetch_assoc($sub_res)){
-                                                             $subname=$result_sub["sub_name"];?>
-                                                            <option value='<?php echo $subname;?>' <?php if(isset($_GET['sid']) && $sub_name==$subname){?>selected <?php } ?>  ><?php echo $subname;?></option>";
+                                                             $subname = $result_sub["sub_name"];
+                                                             $tf      = in_array($subname,$sub_arr);
+                                                             ?>
+                                                            <option value='<?php echo $subname;?>' <?php if(isset($_GET['cid']) && $tf){?> selected <?php } ?>> <?php echo $subname;?> </option>
                                                          <?php } ?>
-                                                    ?>
+
                                                   </select>
                                                   </div>
                                               </div>
-
+<!-- subject name e -->
 
   <!-- buttons s -->
                               <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                  <button class="btn btn-primary" type="button">Cancel</button>
-                                  <input class="btn btn-primary" type="reset" value="Reset" name="reset">
                                   <?php
                                   if(isset($_GET['cid'])){
-                                    echo"<button  type='submit' class='btn btn-success' name='update' value='update'>update</button>";
+                                    echo"<button  type='submit' class='btn btn-success col-md-7 col-xs-12' name='update' value='update'>update</button>";
                                         }
                                   else{
-                                    echo "<input type='submit' class='btn btn-success' name='submit' value='submit'>";
+                                    echo "<input type='submit' class='btn btn-success col-md-7 col-xs-12' name='submit' value='submit'>";
                                   }
                                   ?>
 

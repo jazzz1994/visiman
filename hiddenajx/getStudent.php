@@ -30,6 +30,8 @@ $get_class = $_GET['class'];
           <th class="column-title">gender</th>
           <th class="column-title">class</th>
           <th class="column-title">D.O.B</th>
+          <th class="column-title">Total Fees</th>
+          <th class="column-title">Balance due</th>
           <th class="column-title">operations</th>
       </tr>
 
@@ -44,7 +46,8 @@ $get_class = $_GET['class'];
       $gender       = $result["gender"];
       $class        = $result["class_name"];
       $dob          = $result["dob"];
-
+      $tfees        = $result["tfees"];
+      $bfees        = $result["bfees"];
 
 
 ?>
@@ -63,7 +66,9 @@ $get_class = $_GET['class'];
     <td> <?php echo ucfirst($last_name); ?> </td>
     <td> <?php if($gender=='m'){echo "Male";}else{echo "Female";} ?> </td>
     <td> <?php  echo $class;  ?>  </td>
-    <td> <?php echo $dob;    ?>  </td>
+    <td> <?php echo $dob;   ?>  </td>
+    <td> <?php echo $tfees;  ?>  </td>
+    <td> <?php echo $bfees; ?>  </td>
 
 
     <td><a href='formStudent.php?sid=<?php echo $sid ;?>'>Edit</a> |
